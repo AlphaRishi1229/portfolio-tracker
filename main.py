@@ -1,7 +1,7 @@
 """The main fastapi server."""
 from fastapi import FastAPI
 
-# from urls import blogs_api_router, websocket_v1_router
+from tracker.users.user_apis import user_v1_apis
 
 
 app = FastAPI(
@@ -19,5 +19,5 @@ async def root():
     return {"status": True}
 
 
-# app.include_router(blogs_api_router)
+app.include_router(user_v1_apis)
 # app.include_router(websocket_v1_router)
