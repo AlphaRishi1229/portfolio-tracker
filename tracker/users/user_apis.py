@@ -3,19 +3,16 @@ from fastapi import APIRouter
 
 from tracker.users.handlers.user_handler import authorise_user, create_user
 from tracker.users.schemas.user_schemas import UserResponse
+from utils.constants import BASE_RESPONSE_STATUS_CODES
 
 
 user_v1_apis = APIRouter(
     prefix="/api/v1/user",
     tags=["User related APIs"],
-    responses={
-        401: {"description": "UNAUTHORISED"},
-        404: {"description": "INCORRECT_URL"},
-        500: {"description": "INTERNAL_SERVER_ERROR"}
-    },
+    responses=BASE_RESPONSE_STATUS_CODES,
 )
 
 # Authorisation Api.
-user_v1_apis.add_api_route("/auth", authorise_user, response_model=UserResponse, methods=["POST"])
+user_v1_apis.add_api_route("/auth", authorise_user, response_model=UserResponse, methods=["GET"])
 # Create User Api.
 user_v1_apis.add_api_route("/create", create_user, response_model=UserResponse, methods=["POST"])

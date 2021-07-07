@@ -26,3 +26,8 @@ def get_master_engine():
 def get_db_session():
     sesion_factory = scoped_session(sessionmaker(bind=get_master_engine()))
     return sesion_factory()
+
+
+def get_connection():
+    engine = get_master_engine()
+    return engine.connect()

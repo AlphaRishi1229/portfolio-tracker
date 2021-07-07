@@ -18,7 +18,9 @@ class Securities(Base):
     ticker_symbol = Column(String, index=True, unique=True, nullable=False)
     current_price = Column(Float, nullable=False)
     is_active = Column(Boolean, default=False)
-    created_on = Column(DateTime, default=datetime.utcnow, index=True)
+    created_on = Column(DateTime, default=datetime.now)
+    updated_on = Column(DateTime, default=datetime.now, index=True)
+    updated_by = Column(Integer, ForeignKey("users.id"))
 
     __table_args__ = (
         UniqueConstraint(name, ticker_symbol, name='_security_uc'),
@@ -34,7 +36,7 @@ class User(Base):
     userid = Column(String, unique=True, index=True, nullable=False)
     password = Column(String, nullable=False)
     is_active = Column(Boolean, default=False)
-    created_on = Column(DateTime, default=datetime.utcnow)
+    created_on = Column(DateTime, default=datetime.now)
     portfolios = relationship("Portfolio", backref="portfolios")
 
     __table_args__ = (
@@ -51,8 +53,8 @@ class Portfolio(Base):
     user_id = Column(Integer, ForeignKey("users.id"), index=True)
     average_buy_price = Column(Float, nullable=False)
     quantity = Column(Integer, default=0, nullable=False)
-    created_on = Column(DateTime, default=datetime.utcnow)
-    updated_on = Column(DateTime, default=datetime.utcnow)
+    created_on = Column(DateTime, default=datetime.now)
+    updated_on = Column(DateTime, default=datetime.now)
     security_data = relationship("Securities", backref="securities")
     transactions = relationship("Transaction", backref="transactions")
 
@@ -70,7 +72,7 @@ class Transaction(Base):
     transaction_type = Column(ENUM(*TRANSACTION_TYPES, name="transaction_type_enum"), index=True)
     transaction_amount = Column(Float, nullable=False)
     is_valid_trade = Column(Boolean, default=False)
-    created_on = Column(DateTime, default=datetime.utcnow)
+    created_on = Column(DateTime, default=datetime.now)
 
     __table_args__ = (
         Index("ix_valid_transactions", "portfolio_id", "is_valid_trade"),

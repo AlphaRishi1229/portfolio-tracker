@@ -1,4 +1,6 @@
 """Helper file that holds all the functions required for processing the request."""
+from datetime import datetime
+
 from fastapi import HTTPException
 
 from models.db_models import User
@@ -53,6 +55,7 @@ def add_new_user(new_user: UserCreate) -> User:
             "userid": new_user.userid,
             "password": hash_generate(new_user.password),
             "is_active": new_user.is_active,
+            "created_on": datetime.now()
         }
         user = User(**db_user)
         session.add(user)
