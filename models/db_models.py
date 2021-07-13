@@ -71,8 +71,10 @@ class Transaction(Base):
     portfolio_id = Column(Integer, ForeignKey("portfolios.id"), index=True)
     transaction_type = Column(ENUM(*TRANSACTION_TYPES, name="transaction_type_enum"), index=True)
     transaction_amount = Column(Float, nullable=False)
+    transaction_quantity = Column(Integer)
     is_valid_trade = Column(Boolean, default=False)
     created_on = Column(DateTime, default=datetime.now)
+    user_id = Column(Integer, ForeignKey("users.id"), index=True)
 
     __table_args__ = (
         Index("ix_valid_transactions", "portfolio_id", "is_valid_trade"),

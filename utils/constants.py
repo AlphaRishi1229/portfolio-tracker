@@ -11,3 +11,5 @@ BASE_RESPONSE_STATUS_CODES: Dict = {
     404: {"description": "INCORRECT_URL"},
     500: {"description": "INTERNAL_SERVER_ERROR"}
 }
+
+VALID_TRANSACTIONS = ("BUY", "SELL")
