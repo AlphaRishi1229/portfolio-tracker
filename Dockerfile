@@ -19,11 +19,12 @@ RUN apt update \
     && rm -rf /var/lib/apt/lists/*
 COPY --from=pbase /srv/portfolio-tracker /srv/portfolio-tracker
 COPY --from=pbase /.venv /.venv
-EXPOSE 80
+# EXPOSE 80
 
 ENV PATH="/.venv/bin:$PATH"
 
 # Added PYTHONPATH for alembic upgrade and render alembic.ini
 ENV PYTHONPATH /srv/portfolio-tracker/
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+# CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["python", "main.py"]

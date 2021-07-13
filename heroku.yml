@@ -1,0 +1,11 @@
+setup:
+  addons:
+    - plan: heroku-postgresql
+      as: DATABASE
+  config:
+    POSTGRES_DB: smallcase_tracker
+    POSTGRES_USER: smallcase_read_write
+    POSTGRES_PASSWORD: smallcaseTracker2021
+build:
+  docker:
+    web: Dockerfile

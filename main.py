@@ -1,5 +1,8 @@
 """The main fastapi server."""
+import os
+
 from fastapi import FastAPI
+import uvicorn
 
 from tracker.portfolio.portfolio_apis import portfolio_v1_apis
 from tracker.securities.security_apis import security_v1_apis
@@ -26,3 +29,8 @@ app.include_router(user_v1_apis)
 app.include_router(security_v1_apis)
 app.include_router(transaction_v1_apis)
 app.include_router(portfolio_v1_apis)
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 80))
+    uvicorn.run(app, host="0.0.0.0", port=port)
