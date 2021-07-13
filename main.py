@@ -9,7 +9,7 @@ from tracker.users.user_apis import user_v1_apis
 
 app = FastAPI(
     title="Portfolio Tracker - Smallcase",
-    description="""This project tracks your portfolio""",
+    description="""This project keeps a tracks of your portfolio. You can perform transaction all from these api's.""",
     version="1.0.0",
     docs_url="/docs/swagger",
     redoc_url="/docs/redoc",

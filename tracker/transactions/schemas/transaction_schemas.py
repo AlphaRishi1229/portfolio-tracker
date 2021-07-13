@@ -1,6 +1,4 @@
-import datetime
-
-from pydantic import BaseModel, ValidationError, validator
+from pydantic import BaseModel, validator
 
 from utils.constants import VALID_TRANSACTIONS
 
@@ -9,6 +7,7 @@ class BaseResponse(BaseModel):
     """Base Response for adding updating data."""
     success: bool = False
     message: str = ""
+    ref_id: str = ""
 
 
 class TradeTransaction(BaseModel):
